@@ -1,7 +1,17 @@
 <template>
+<div>
+  <Typing/>
+</div>
 </template>
 
 <script>
+import Typing from "@/components/Typing"
+
+export default {
+  components: {
+    Typing,
+  },
+}
 </script>
 
 <style>
