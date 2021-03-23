@@ -6,10 +6,10 @@
     </div>
     <button v-if="startFlg!=true" class="startButton mb-20" @click="gameStart">START</button>
     <div v-if="startFlg">
-      <div class="question mb-20">apple</div>
+      <div class="question mb-20">{{ current_question }}</div>
       <div class="clear">Clear!</div>
       <div class="typeformWapper mb-20">
-        <input type="text" class="typeform">
+        <input v-model="typeBox" type="text" class="typeform">
       </div>
       <div class="gaugeWarapper mb-20">
         <div class="gauge"></div>
@@ -23,13 +23,36 @@
 export default{
 data(){
   return {
-    startFlg: ""
+    startFlg: "",
+    current_question: "",
+    quesions: [
+      'apple',
+      'banana',
+      'chocolate',
+      'donut',
+      'espresso',
+    ],
+    typeBox: ""
   }
 },
 
 methods:{
   gameStart:function(){
     this.startFlg = true;
+  }
+},
+
+mounted: function(){
+  this.current_question = this.quesions[0]
+},
+
+watch:{
+  typeBox:function(e){
+    if(e == this.current_question){
+      this.quesions.splice(0,1)
+      this.current_question = this.quesions[0]
+      this.typeBox = ""
+    }
   }
 }
 }
