@@ -14,7 +14,7 @@
       <div class="gaugeWarapper mb-20">
         <div class="gauge"></div>
       </div>
-      <div>1/5</div>
+      <div>{{ current_question_counts }}/{{ question_counts }}</div>
     </div>
   </div>
 </template>
@@ -25,14 +25,16 @@ data(){
   return {
     startFlg: "",
     current_question: "",
-    quesions: [
+    questions: [
       'apple',
       'banana',
       'chocolate',
       'donut',
       'espresso',
     ],
-    typeBox: ""
+    typeBox: "",
+    current_question_counts: 0,
+    question_counts:0
   }
 },
 
@@ -43,15 +45,17 @@ methods:{
 },
 
 mounted: function(){
-  this.current_question = this.quesions[0]
+  this.current_question = this.questions[0]
+  this.question_counts = this.questions.length
 },
 
 watch:{
   typeBox:function(e){
     if(e == this.current_question){
-      this.quesions.splice(0,1)
-      this.current_question = this.quesions[0]
+      this.questions.splice(0,1)
+      this.current_question = this.questions[0]
       this.typeBox = ""
+      this.current_question_counts += 1
     }
   }
 }
