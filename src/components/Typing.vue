@@ -9,10 +9,10 @@
       <div class="question mb-20">{{ current_question }}</div>
       <div v-if="current_question_counts == question_counts" class="clear">Clear!</div>
       <div class="typeformWapper mb-20">
-        <input v-model="typeBox" type="text" class="typeform">
+        <input id="typeForm" v-model="typeBox" type="text" class="typeform">
       </div>
       <div class="gaugeWarapper mb-20">
-        <div class="gauge"></div>
+        <div :style="styleObject" class="gauge"></div>
       </div>
       <div>{{ current_question_counts }}/{{ question_counts }}</div>
     </div>
@@ -34,13 +34,31 @@ data(){
     ],
     typeBox: "",
     current_question_counts: 0,
-    question_counts:0
+    question_counts:0,
+  }
+},
+
+computed:{
+  styleObject:function(width,color){
+    width = 20 * this.current_question_counts + "%"
+    if(this.current_question_counts == 5){
+      color = "#03a9f4"
+    }else{
+      color = "orange"
+    }
+    return{
+      'width': width,
+      'background-color': color
+    }
   }
 },
 
 methods:{
   gameStart:function(){
     this.startFlg = true;
+    this.$nextTick(function(){
+      document.getElementById('typeForm').focus()
+    })
   }
 },
 
@@ -121,6 +139,7 @@ watch:{
 
 .gauge{
   height: 12px;
+  transition: all .3s ease;
 }
 
 .gaugeWarapper{
