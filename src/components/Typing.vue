@@ -4,20 +4,35 @@
       <h1>Typing Game</h1>
       <div class="marker"></div>
     </div>
-    <button class="startButton mb-20">START</button>
-    <div class="question mb-20">apple</div>
-    <div class="clear">Clear!</div>
-    <div class="typeformWapper mb-20">
-      <input type="text" class="typeform">
+    <button v-if="startFlg!=true" class="startButton mb-20" @click="gameStart">START</button>
+    <div v-if="startFlg">
+      <div class="question mb-20">apple</div>
+      <div class="clear">Clear!</div>
+      <div class="typeformWapper mb-20">
+        <input type="text" class="typeform">
+      </div>
+      <div class="gaugeWarapper mb-20">
+        <div class="gauge"></div>
+      </div>
+      <div>1/5</div>
     </div>
-    <div class="gaugeWarapper mb-20">
-      <div class="gauge"></div>
-    </div>
-    <div>1/5</div>
   </div>
 </template>
 
 <script>
+export default{
+data(){
+  return {
+    startFlg: ""
+  }
+},
+
+methods:{
+  gameStart:function(){
+    this.startFlg = true;
+  }
+}
+}
 </script>
 
 <style>
