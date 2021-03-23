@@ -7,7 +7,7 @@
     <button v-if="startFlg!=true" class="startButton mb-20" @click="gameStart">START</button>
     <div v-if="startFlg">
       <div class="question mb-20">{{ current_question }}</div>
-      <div class="clear">Clear!</div>
+      <div v-if="current_question_counts == question_counts" class="clear">Clear!</div>
       <div class="typeformWapper mb-20">
         <input v-model="typeBox" type="text" class="typeform">
       </div>
